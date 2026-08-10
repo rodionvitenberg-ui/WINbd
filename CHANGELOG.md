@@ -118,9 +118,18 @@
 
 ## [6.x] — Frontend: скелет (Фаза 6)
 
-### Планируется
-- Vite + React + SCSS, роутинг, AuthContext, axios-клиент с JWT.
-- Учебник `docs/history/phase-6-frontend-core.md`.
+### 2026-08-11
+- **Решение владельца:** переход с Vite на **Next.js App Router + TypeScript** (портфолио-вес, знакомство с фреймворком, Vercel-деплой по ТЗ). Обновлены манифесты: `.clinerules.md`, `CLAUDE.md`, `ROADMAP.md`, `README.md`, `DESIGN.md`.
+- Инициализация: `npx create-next-app@latest frontend --ts --app --no-tailwind --src-dir --use-npm --eslint --no-git --import-alias "@/*" --yes`.
+- `cd frontend && npm install axios sass socket.io-client` (socket.io-client для фазы 8 — колокольчик).
+- Созданы: `src/types/api.ts` (зеркало бэкенда), `src/api/client.ts` (axios + интерцептор JWT), `src/context/AuthContext.tsx` (login/register/logout/восстановление сессии), `src/components/Navigation.tsx`.
+- SCSS по DESIGN.md: `_variables`, `_base`, `_components`, `main.scss` (импорт в `layout.tsx`).
+- Страницы (App Router): `/` (список), `/login`, `/register`, `/news/[id]` (рендер блоков: text/image/quote/code/file), `/editor` (защищённая, каркас с заголовком; блоки — Фаза 7).
+- Удалены дефолтные `globals.css`, `page.module.css`. Созданы `frontend/.env.example` и `.env.local` (`NEXT_PUBLIC_API_URL=http://localhost:5000`).
+- **Проверка:** `npm run build` — успешно (TypeScript ок, все 5 маршрутов).
+- Создан учебник `docs/history/phase-6-frontend-core.md`. Обновлён `PROGRESS.md` (6.1–6.3 = ✅).
+- ❗ Команды фазы 6 (журнал): `create-next-app ...`; `npm install axios sass socket.io-client`; `rm` дефолтных CSS; `npm run build`.
+- **Фаза 6 завершена.**
 
 ---
 

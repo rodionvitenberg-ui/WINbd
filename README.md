@@ -2,7 +2,7 @@
 
 > Тестовое задание: полноценный редактор новостных статей с авторизацией, отложенной публикацией, загрузкой файлов и real-time уведомлениями.
 
-**Стек:** Node.js + Express + MongoDB (Mongoose, Atlas) · React + Vite · JWT · bcrypt · Socket.io · SCSS
+**Стек:** Node.js + Express + MongoDB (Mongoose, Atlas) · Next.js (App Router) + TypeScript · JWT · bcrypt · Socket.io · SCSS
 
 ---
 
@@ -74,18 +74,20 @@ WINbd/
 │   │   ├── app.js
 │   │   ├── config/db.js
 │   │   ├── models/         # User, News
-│   │   ├── routes/         # auth, news
+│   │   ├── routes/         # auth, news, upload
 │   │   ├── controllers/    # логика обработки запросов
 │   │   ├── middleware/     # auth, error
 │   │   └── utils/
 │   └── uploads/            # загруженные файлы
-└── frontend/
-    └── src/
-        ├── api/            # axios-клиент с JWT
-        ├── context/        # AuthContext
-        ├── pages/          # Login, Register, NewsList, Editor
-        ├── components/     # editor, notifications, news
-        └── styles/         # SCSS
+└── frontend/               # Next.js (App Router) + TypeScript
+    ├── src/
+    │   ├── app/            # страницы: login, register, news/[id], editor
+    │   ├── api/            # axios-клиент с JWT
+    │   ├── context/        # AuthContext
+    │   ├── components/     # editor, notifications, news
+    │   ├── types/          # TypeScript-типы (User, News, Block)
+    │   └── styles/         # SCSS
+    └── package.json
 ```
 
 ---

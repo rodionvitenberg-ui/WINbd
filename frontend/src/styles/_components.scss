@@ -1,0 +1,334 @@
+// Компоненты интерфейса: кнопки, поля, формы, навигация, карточки, блоки контента.
+// Стили по дизайн-системе DESIGN.md.
+
+@use './variables' as *;
+
+/* ===== Кнопки ===== */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 10px 16px;
+  border-radius: $radius;
+  border: 1px solid transparent;
+  font-size: 14px;
+  font-weight: 500;
+  transition: background 0.2s ease, border-color 0.2s ease;
+  text-decoration: none;
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+}
+
+.btn--primary {
+  background: $accent;
+  color: #06101f;
+
+  &:hover:not(:disabled) {
+    background: $accent-hover;
+  }
+}
+
+.btn--secondary {
+  background: transparent;
+  color: $text-primary;
+  border-color: $border-subtle;
+
+  &:hover:not(:disabled) {
+    border-color: $accent;
+    color: $accent;
+  }
+}
+
+.btn--ghost {
+  background: transparent;
+  color: $text-secondary;
+
+  &:hover:not(:disabled) {
+    color: $danger;
+  }
+}
+
+.btn--block {
+  width: 100%;
+}
+
+/* ===== Поля форм ===== */
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.field__label {
+  font-size: 13px;
+  color: $text-secondary;
+}
+
+.field__input {
+  background: $bg-elevated;
+  border: 1px solid $border-subtle;
+  border-radius: $radius;
+  color: $text-primary;
+  padding: 10px 14px;
+  font-size: 15px;
+  outline: none;
+  transition: border-color 0.2s ease;
+
+  &:focus {
+    border-color: $accent;
+  }
+}
+
+.field__input--large {
+  font-size: 20px;
+  padding: 12px 16px;
+}
+
+/* ===== Страницы авторизации ===== */
+.auth-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.auth-form {
+  background: $bg-surface;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-lg;
+  padding: 32px;
+  width: 100%;
+  max-width: 380px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.auth-form__title {
+  margin: 0;
+  font-size: 24px;
+}
+
+.auth-form__alt {
+  margin: 0;
+  font-size: 14px;
+  color: $text-secondary;
+  text-align: center;
+}
+
+/* ===== Навигация ===== */
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 24px;
+  background: rgba(15, 17, 21, 0.9);
+  backdrop-filter: blur(6px);
+  border-bottom: 1px solid $border-subtle;
+}
+
+.nav__logo {
+  font-weight: 700;
+  font-size: 18px;
+  color: $text-primary;
+  letter-spacing: 0.5px;
+}
+
+.nav__links {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.nav__user {
+  font-size: 14px;
+  color: $text-secondary;
+}
+
+/* ===== Список новостей ===== */
+.news-list {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 32px 24px;
+}
+
+.news-list__title {
+  margin: 0 0 20px;
+  font-size: 30px;
+}
+
+.news-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 16px;
+}
+
+.news-card {
+  display: block;
+  background: $bg-surface;
+  border: 1px solid $border-subtle;
+  border-radius: $radius-lg;
+  padding: 20px;
+  color: $text-primary;
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+
+  &:hover {
+    box-shadow: $shadow-card;
+    transform: translateY(-2px);
+    color: $text-primary;
+  }
+}
+
+.news-card__title {
+  margin: 0 0 8px;
+  font-size: 18px;
+}
+
+.news-card__date {
+  font-size: 13px;
+  color: $text-muted;
+}
+
+/* ===== Детальная страница новости ===== */
+.news-detail {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 32px 24px;
+}
+
+.news-detail__title {
+  margin: 0 0 8px;
+  font-size: 34px;
+  line-height: 1.2;
+}
+
+.news-detail__date {
+  color: $text-muted;
+  font-size: 14px;
+}
+
+.news-detail__article {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 24px;
+}
+
+/* ===== Блоки контента ===== */
+.block-text {
+  font-size: 17px;
+  line-height: 1.7;
+  margin: 0;
+}
+
+.block-text--bold {
+  font-weight: 700;
+}
+
+.block-text--italic {
+  font-style: italic;
+}
+
+.block-image img {
+  max-width: 100%;
+  border-radius: $radius;
+  display: block;
+}
+
+.block-image figcaption {
+  font-size: 13px;
+  color: $text-muted;
+  margin-top: 6px;
+}
+
+.block-quote {
+  margin: 0;
+  padding: 12px 20px;
+  border-left: 3px solid $accent;
+  font-style: italic;
+  font-size: 20px;
+  line-height: 1.6;
+  color: $text-primary;
+}
+
+.block-quote cite {
+  display: block;
+  font-size: 14px;
+  color: $text-secondary;
+  margin-top: 6px;
+}
+
+.block-code {
+  background: $code-bg;
+  color: $code-text;
+  border-radius: $radius;
+  padding: 16px;
+  overflow-x: auto;
+  font-size: 14px;
+  line-height: 1.6;
+  position: relative;
+}
+
+.block-code__lang {
+  position: absolute;
+  top: 8px;
+  right: 12px;
+  font-size: 12px;
+  color: $text-muted;
+  text-transform: uppercase;
+}
+
+.block-file a {
+  color: $accent;
+}
+
+/* ===== Редактор (фаза 7 наполнит) ===== */
+.editor {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 32px 24px;
+}
+
+.editor__title {
+  margin: 0 0 20px;
+  font-size: 26px;
+}
+
+.editor__form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.editor__hint {
+  color: $text-muted;
+  font-size: 14px;
+  border: 1px dashed $border-subtle;
+  border-radius: $radius;
+  padding: 12px;
+}
+
+/* ===== Утилиты ===== */
+.muted-text {
+  color: $text-muted;
+}
+
+.error-text {
+  color: $danger;
+  font-size: 14px;
+  margin: 0;
+}
+
+.success-text {
+  color: $success;
+  font-size: 14px;
+  margin: 0;
+}

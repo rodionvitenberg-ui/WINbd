@@ -85,13 +85,13 @@
 
 ---
 
-## Фаза 6 — Frontend: скелет (Vite + React + auth)
+## Фаза 6 — Frontend: скелет (Next.js App Router + TypeScript + auth)
 
 | # | Задача | Статус | Дата начала | Дата завершения | Понял ли? |
 |---|---|---|---|---|---|
-| 6.1 | Vite + React + SCSS | ⬜ | | | |
-| 6.2 | Роутинг, страницы Login/Register/NewsList/Editor | ⬜ | | | |
-| 6.3 | AuthContext + axios-клиент с JWT | ⬜ | | | |
+| 6.1 | Next.js App Router + TypeScript + SCSS | ✅ | 2026-08-11 | 2026-08-11 | ✅ |
+| 6.2 | Маршруты /login /register / /news/[id] /editor (App Router) | ✅ | 2026-08-11 | 2026-08-11 | ✅ |
+| 6.3 | AuthContext + axios-клиент с JWT + типы API + build | ✅ | 2026-08-11 | 2026-08-11 | ✅ |
 
 ---
 

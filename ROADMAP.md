@@ -105,14 +105,14 @@
 
 ---
 
-## Фаза 6 — Frontend: скелет (Vite + React + роутинг + auth)
+## Фаза 6 — Frontend: скелет (Next.js App Router + TypeScript + роутинг + auth)
 
-**Цель:** поднять SPA, авторизацию на клиенте, защиту маршрутов.
+**Цель:** поднять SPA на Next.js (App Router), авторизацию на клиенте, защиту маршрутов.
 
 **Задачи:**
-- Vite + React (функциональные компоненты, хуки).
-- `react-router-dom`, страницы Login/Register/NewsList/Editor.
-- `AuthContext`, axios-клиент с JWT.
+- Инициализация Next.js + TypeScript (функциональные компоненты, хуки).
+- App Router: страницы `/login`, `/register`, `/`, `/news/[id]`, `/editor`.
+- `AuthContext`, TypeScript-типы API, axios-клиент с JWT.
 - SCSS-структура из `DESIGN.md`.
 
 **Учим:** useState/useEffect/useContext, защищённые маршруты.
