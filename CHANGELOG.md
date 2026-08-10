@@ -17,11 +17,22 @@
 - Создан `PROGRESS.md` — журнал прогресса с колонкой «Понял ли?».
 - Создан `CHANGELOG.md` — этот файл.
 
-### Ожидается далее (та же фаза)
-- `README.md` — описание и запуск.
-- `docs/history/phase-0-fundament.md` — учебник фазы 0 (git/GitHub, npm, структура, все команды).
-- Каркас папок `backend/` и `frontend/`.
-- `git init` → первый коммит → GitHub-репозиторий → первый push.
+- Создан `README.md` — описание проекта и запуск.
+- Создан `docs/history/phase-0-fundament.md` — учебник фазы 0 (концепции, альтернативы, git/npm, все команды).
+- Создана структура папок `backend/` и `frontend/`, файл `backend/uploads/.gitkeep`.
+- Создан `.gitignore` (node_modules, .env, uploads/, логи, .DS_Store и т.д.).
+- `git init` → ветка переименована в `main` → первый коммит `b239fb0`.
+- Через GitHub MCP создан удалённый репозиторий **`rodionvitenberg-ui/WINbd`** (https://github.com/rodionvitenberg-ui/WINbd), `git remote add origin`, первый `git push -u origin main`.
+- **Фаза 0 завершена.** Файлы: `.clinerules.md`, `CLAUDE.md`, `DESIGN.md`, `ROADMAP.md`, `PROGRESS.md`, `CHANGELOG.md`, `README.md`, `.gitignore`, `docs/history/phase-0-fundament.md`.
+- Обновлены `PROGRESS.md` (задачи 0.1–0.11 = ✅) и этот `CHANGELOG.md`.
+- ❗ Актуальные использованные команды (журнал):
+  - `git init` — репозиторий в `WINbd`
+  - `git add .` — добавить все файлы в индекс
+  - `git commit -m "Фаза 0: правила, манифесты, дизайн-система, README, структура проекта"` — первый коммит
+  - `git branch -M main` — переименовать ветку
+  - [GitHub MCP] `create_repository` → `rodionvitenberg-ui/WINbd`
+  - `git remote add origin https://github.com/rodionvitenberg-ui/WINbd.git`
+  - `git push -u origin main`
 
 ---
 
