@@ -38,10 +38,10 @@
 
 | # | Задача | Статус | Дата начала | Дата завершения | Понял ли? |
 |---|---|---|---|---|---|
-| 1.1 | npm init, установка express/mongoose/dotenv/cors/nodemon | ⬜ | | | |
-| 1.2 | `.env` / `.env.example` | ⬜ | | | |
-| 1.3 | `server.js`, `app.js`, `config/db.js` | ⬜ | | | |
-| 1.4 | Endpoint `/api/health` + CORS | ⬜ | | | |
+| 1.1 | npm init, установка express/mongoose/dotenv/cors/nodemon | ✅ | 2026-08-11 | 2026-08-11 | ✅ |
+| 1.2 | `.env` / `.env.example` | ✅ | 2026-08-11 | 2026-08-11 | ✅ |
+| 1.3 | `server.js`, `app.js`, `config/db.js` | ✅ | 2026-08-11 | 2026-08-11 | ✅ |
+| 1.4 | Endpoint `/api/health` + CORS + проверка | ✅ | 2026-08-11 | 2026-08-11 | ✅ |
 
 ---
 

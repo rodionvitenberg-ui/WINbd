@@ -38,11 +38,17 @@
 
 ## [1.x] — Backend: каркас (Фаза 1)
 
-### Планируется
-- npm-инициализация backend, установка express/mongoose/dotenv/cors/nodemon.
-- `.env` / `.env.example` (MONGO_URI, JWT_SECRET, PORT).
-- `server.js`, `app.js`, `config/db.js`, `/api/health`, CORS.
-- Учебник `docs/history/phase-1-backend-core.md`.
+### 2026-08-11
+- `cd backend && npm init -y` — создан `package.json` (затем переписан под `winbd-backend`, скрипты `dev`/`start`).
+- `cd backend && npm install express mongoose dotenv cors` — production-зависимости.
+- `cd backend && npm install --save-dev nodemon` — dev-зависимость (автоперезапуск при изменениях).
+- Создан `backend/.env.example` (шаблон: PORT, MONGO_URI, JWT_SECRET, JWT_EXPIRES_IN, CORS_ORIGIN) → `backend/.env` (`cp .env.example .env`; секрет в git не попадает — `.gitignore`).
+- Созданы `backend/src/config/db.js` (подключение MongoDB через Mongoose), `backend/src/app.js` (createApp: middleware CORS/JSON/urlencoded, `/api/health`, 404), `backend/src/server.js` (dotenv → createApp → connectDB → listen).
+- **Проверка:** приложение поднято на случайном порту, `GET /api/health` → HTTP 200, `{"status":"ok","uptime":...,"timestamp":...}`, CORS заголовок `*` (в тесте без dotenv сработал fallback; в проде — `http://localhost:5173` из `.env`).
+- Создан учебник `docs/history/phase-1-backend-core.md` (middleware, CORS, dotenv, Mongoose, команды, вопросы).
+- Обновлены `PROGRESS.md` (1.1–1.4 = ✅) и этот `CHANGELOG.md`.
+- ❗ Команды фазы 1 (журнал): `npm init -y`; `npm install express mongoose dotenv cors`; `npm install --save-dev nodemon`; `cp .env.example .env`; проверка через `node -e "..."` с `app.listen(0)` + `fetch`.
+- **Фаза 1 завершена.** Следующее: вставить реальный `MONGO_URI` из Atlas в `backend/.env` и запустить `npm run dev` (проверить «MongoDB подключена»).
 
 ---
 
