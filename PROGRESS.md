@@ -49,10 +49,10 @@
 
 | # | Задача | Статус | Дата начала | Дата завершения | Понял ли? |
 |---|---|---|---|---|---|
-| 2.1 | Модель User | ⬜ | | | |
-| 2.2 | POST /api/auth/register (bcrypt.hash) | ⬜ | | | |
-| 2.3 | POST /api/auth/login (jwt.sign) | ⬜ | | | |
-| 2.4 | GET /api/auth/me + middleware токена | ⬜ | | | |
+| 2.1 | Модель User + CONTEXT.md + ADR 0001 | ✅ | 2026-08-11 | 2026-08-11 | ✅ |
+| 2.2 | POST /api/auth/register (bcrypt.hash) | ✅ | 2026-08-11 | 2026-08-11 | ✅ |
+| 2.3 | POST /api/auth/login (jwt.sign) | ✅ | 2026-08-11 | 2026-08-11 | ✅ |
+| 2.4 | GET /api/auth/me + middleware токена + проверка (400/401/200) | ✅ | 2026-08-11 | 2026-08-11 | ✅ |
 
 ---
 

@@ -54,9 +54,19 @@
 
 ## [2.x] — Авторизация (Фаза 2) ⭐
 
-### Планируется
-- Модель `User`, регистрация/логин, JWT, middleware проверки токена.
-- Учебник `docs/history/phase-2-auth.md`.
+### 2026-08-11
+- `cd backend && npm install jsonwebtoken bcrypt` — пакеты для JWT и хеширования.
+- Создана модель `backend/src/models/User.js` (email с unique/lowercase/trim, `passwordHash` с `select: false`, timestamps, метод `comparePassword`).
+- Создан `backend/src/middleware/auth.middleware.js` — проверка JWT: заголовок `Authorization: Bearer <token>`, `jwt.verify`, `req.user = payload`, 401 при ошибках.
+- Создан `backend/src/controllers/auth.controller.js` — `register` (валидация, `bcrypt.hash`, `User.create`, выдача токена), `login` (`User.findOne().select('+passwordHash')`, `comparePassword`, универсальная ошибка 401), `getMe` (по `req.user.userId`).
+- Создан `backend/src/routes/auth.routes.js` — POST /register, POST /login, GET /me (защищён middleware); подключён в `app.js` как `app.use('/api/auth', authRoutes)`.
+- ⚠️ Инцидент: файл роутера создался с именем `auth.r` (усечение). Исправлено: создан корректный `auth.routes.js`, ошибочный `auth.r` удалён.
+- **Проверка endpoints (без БД):** register без тела → 400; login без тела → 400; me без токена → 401; health → 200.
+- Скилл `domain-modeling`: создан глоссарий `CONTEXT.md` (User, News, Block, Draft, Published, Scheduled publication, JWT, Authorship) и первый ADR `docs/adr/0001-scheduled-publication-as-data.md` («отложенная публикация — данные, а не таймер»).
+- Создан учебник `docs/history/phase-2-auth.md` (bcrypt/соль, JWT-устройство, middleware-«охранник», select:false, универсальная ошибка, вопросы).
+- Обновлены `PROGRESS.md` (2.1–2.4 = ✅) и этот `CHANGELOG.md`.
+- ❗ Команды фазы 2 (журнал): `npm install jsonwebtoken bcrypt`; проверка через `node -e` + `fetch` (400/401/200).
+- **Фаза 2 завершена.** Полный цикл регистрации/логина заработает после вставки реального `MONGO_URI` из Atlas в `backend/.env`.
 
 ---
 

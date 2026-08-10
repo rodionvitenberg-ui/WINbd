@@ -13,7 +13,9 @@
 const express = require('express');
 const cors = require('cors');
 
-// Здесь будут подключаться роутеры (auth, news) — добавятся в следующих фазах.
+const authRoutes = require('./routes/auth.routes');
+
+// Здесь будет подключаться роутер news — добавится в фазе 3.
 
 /**
  * Проверка здоровья сервера: GET /api/health.
@@ -57,7 +59,8 @@ function createApp() {
   // Health-check: простейший способ убедиться, что сервер отвечает.
   app.get('/api/health', healthHandler);
 
-  // Пока нет роутеров auth/news — они появятся в фазах 2 и 3.
+  // Маршруты авторизации: /api/auth/register, /api/auth/login, /api/auth/me.
+  app.use('/api/auth', authRoutes);
 
   // --- Обработчик ошибок (добавим централизованный в фазе 2) ---
 
