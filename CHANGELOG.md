@@ -72,9 +72,17 @@
 
 ## [3.x] — News CRUD + отложенная публикация (Фаза 3) ⭐
 
-### Планируется
-- Модель `News`, CRUD endpoints, публикация сейчас / по дате.
-- Учебник `docs/history/phase-3-news-crud.md`.
+### 2026-08-11
+- Создана модель `backend/src/models/News.js` — `title`, `blocks[]` (blockSchema со `strict: false`), `author` (ObjectId, ref: 'User'), `status: draft|published`, `publishAt`, timestamps.
+- Создан `backend/src/controllers/news.controller.js` — `createNews`, `getNews` (пагинация, публичный список vs `?all=1`), `getNewsById`, `updateNews`, `deleteNews` (право автора — 403 для чужих).
+- Создан `backend/src/routes/news.routes.js` — все маршруты под `router.use(authMiddleware)` (требование ТЗ: endpoints только для авторизованных). Подключён в `app.js` как `app.use('/api/news', newsRoutes)`.
+- **Отложенная публикация = данные, а не таймер** (см. ADR 0001): при чтении фильтр `status === 'published' && publishAt <= now`; `publishNow: true` — публикация сразу; `publishAt` в будущем — черновик, который станет публичным после наступления даты.
+- ⚠️ Инцидент с усечённым именем файла роутера (`news.routes` без `.js`) — исправлен: создан `news.routes.js`, ошибочный файл удалён.
+- **Проверка (без БД):** GET/POST /api/news без токена → 401; с битым токеном → 401.
+- Создан учебник `docs/history/phase-3-news-crud.md` (публикация-как-фильтр, право автора, пагинация, curl-сценарии). Обновлён `PROGRESS.md` (3.1–3.4 = ✅).
+- Переход на MCP `filesystem` для записи/правки файлов (надёжнее терминала).
+- ❗ Команды фазы 3: создание файлов через MCP filesystem; проверка через `node -e` + `fetch` (401/401).
+- **Фаза 3 завершена.** Следующее: вставить реальный `MONGO_URI` из Atlas в `backend/.env` и прогнать curl-сценарии регистрации + CRUD новостей (учебник, раздел 4).
 
 ---
 
