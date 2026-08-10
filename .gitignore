@@ -1,0 +1,27 @@
+# Зависимости
+node_modules/
+
+# Секреты (НЕ пушить!)
+.env
+.env.local
+
+# Папка загрузок: содержимое не храним, но папку и файл-якорь оставляем
+uploads/*
+!uploads/.gitkeep
+
+# Логи
+*.log
+
+# Файлы ОС
+.DS_Store
+Thumbs.db
+
+# Vite/Next сборки
+dist/
+build/
+.next/
+
+# Редакторы
+.idea/
+.vscode/*
+!.vscode/extensions.json
