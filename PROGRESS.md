@@ -80,8 +80,8 @@
 
 | # | Задача | Статус | Дата начала | Дата завершения | Понял ли? |
 |---|---|---|---|---|---|
-| 5.1 | Socket.io на сервере | ⬜ | | | |
-| 5.2 | Эмиссия news:created/updated/deleted | ⬜ | | | |
+| 5.1 | Socket.io на сервере (utils/socket.js, http.createServer) | ✅ | 2026-08-11 | 2026-08-11 | ✅ |
+| 5.2 | Эмиссия news:created/updated/deleted + тест real-time | ✅ | 2026-08-11 | 2026-08-11 | ✅ |
 
 ---
 

@@ -104,9 +104,15 @@
 
 ## [5.x] — Real-time (Фаза 5) ⭐
 
-### Планируется
-- Socket.io, эмиссия news:created/updated/deleted.
-- Учебник `docs/history/phase-5-real-time.md`.
+### 2026-08-11
+- `cd backend && npm install socket.io` и `npm install --save-dev socket.io-client` (клиент — для теста).
+- Создан `backend/src/utils/socket.js` — синглтон: `initIO(server)` (создаёт Server с CORS из `.env`, логирует connect/disconnect) и `getIO()` (бросает ошибку, если не инициализирован).
+- `backend/src/server.js`: `app.listen()` заменён на `http.createServer(app)` + `initIO(server)` + `server.listen(PORT)`.
+- `backend/src/controllers/news.controller.js`: `getIO().emit(...)` в createNews (`news:created`), updateNews (`news:updated`), deleteNews (`news:deleted`) — передаём `{ id, title, status }`.
+- **Проверка:** временный скрипт `test-socket.js` поднял сервер + клиент (socket.io-client); клиент получил `news:created` и `news:updated` — real-time работает. Скрипт и файлы результата удалены.
+- Создан учебник `docs/history/phase-5-real-time.md` (HTTP vs WebSocket, синглтон, http.createServer, emit; 10 вопросов). Обновлён `PROGRESS.md` (5.1–5.2 = ✅).
+- ❗ Команды фазы 5 (журнал): `npm install socket.io`; `npm install --save-dev socket.io-client`; тест через короткий `node test-socket.js` (результат в файл → filesystem).
+- **Фаза 5 завершена.**
 
 ---
 

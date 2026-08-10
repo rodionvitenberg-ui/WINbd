@@ -12,6 +12,7 @@
  */
 
 const News = require('../models/News');
+const { getIO } = require('../utils/socket');
 
 /**
  * POST /api/news — создать новость (только для авторизованных).
@@ -61,6 +62,15 @@ async function createNews(req, res) {
     if (publishDate) newsData.publishAt = publishDate;
 
     const news = await News.create(newsData);
+
+    // Real-time: сообщаем всем подключённым клиентам о создании новости.
+    // Данные: id, заголовок, статус — клиент сам решит, как их показать
+    // (например, в «колокольчике» уведомлений).
+    getIO().emit('news:created', {
+      id: news._id.toString(),
+      title: news.title,
+      status: news.status,
+    });
 
     // 201 — Created.
     res.status(201).json({ news });
@@ -193,6 +203,13 @@ async function updateNews(req, res) {
 
     const updated = await news.save();
 
+    // Real-time: сообщаем всем о изменении новости.
+    getIO().emit('news:updated', {
+      id: updated._id.toString(),
+      title: updated.title,
+      status: updated.status,
+    });
+
     res.json({ news: updated });
   } catch (error) {
     res.status(500).json({ message: 'Ошибка сервера при обновлении новости', error: error.message });
@@ -218,6 +235,12 @@ async function deleteNews(req, res) {
     }
 
     await news.deleteOne();
+
+    // Real-time: сообщаем всем об удалении новости.
+    getIO().emit('news:deleted', {
+      id: news._id.toString(),
+      title: news.title,
+    });
 
     res.json({ message: 'Новость удалена' });
   } catch (error) {
