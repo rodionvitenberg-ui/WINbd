@@ -12,9 +12,11 @@
 
 const express = require('express');
 const cors = require('cors');
+const path = require('path');
 
 const authRoutes = require('./routes/auth.routes');
 const newsRoutes = require('./routes/news.routes');
+const uploadRoutes = require('./routes/upload.routes');
 
 /**
  * Проверка здоровья сервера: GET /api/health.
@@ -64,11 +66,34 @@ function createApp() {
   // Маршруты новостей: /api/news (все защищены middleware'ом авторизации).
   app.use('/api/news', newsRoutes);
 
-  // --- Обработчик ошибок (добавим централизованный в фазе 2) ---
+  // Маршрут загрузки файлов: /api/upload (защищён middleware'ом авторизации).
+  app.use('/api/upload', uploadRoutes);
 
-  // 404 для неизвестных маршрутов.
+  // Раздача загруженных файлов как статики: любой запрос /uploads/<файл>
+  // возвращает файл из папки uploads/ (без авторизации — файлы публичны по URL).
+  // express.static — встроенный middleware Express для раздачи статических файлов.
+  app.use('/uploads', express.static(path.join(__dirname, '..', 'uploads')));
+
+  // --- Обработчик 404 для неизвестных маршрутов ---
   app.use((req, res) => {
     res.status(404).json({ message: 'Маршрут не найден' });
+  });
+
+  // --- Централизованный обработчик ошибок ---
+  // Express сам вызывает этот middleware, когда в любом роуте/контроллере
+  // ошибка была передана в next(error) (multer так и делает при файле с
+  // неразрешённым типом или превышением размера).
+  //
+  // КАЖДЫЙ обработчик ошибок Express обязан иметь 4 параметра (даже если
+  // next не используется) — иначе Express не распознает его как error handler.
+  // eslint-disable-next-line no-unused-vars
+  app.use((err, req, res, next) => {
+    // Multer кладёт в ошибку свойство status (например, LIMIT_FILE_SIZE или 400
+    // для fileFilter). Учитываем его; иначе 500.
+    const status = err.status || 500;
+
+    // В продакшене не стоит отдавать стек ошибки клиенту — только сообщение.
+    res.status(status).json({ message: err.message || 'Ошибка сервера' });
   });
 
   return app;

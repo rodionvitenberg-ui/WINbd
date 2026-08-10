@@ -88,9 +88,17 @@
 
 ## [4.x] — Файлы и статика (Фаза 4)
 
-### Планируется
-- Multer, express.static, ограничения.
-- Учебник `docs/history/phase-4-files.md`.
+### 2026-08-11
+- `cd backend && npm install multer` — библиотека для multipart/form-data.
+- Создан `backend/src/config/upload.js` — diskStorage в `uploads/`, уникальные имена файлов, MIME-фильтр (картинки/PDF/doc/docx), лимит 5 МБ; ошибкам fileFilter присвоен `status: 400`.
+- Создан `backend/src/controllers/upload.controller.js` — возвращает `{ url, name, size, mimetype }` по `req.file`.
+- Создан `backend/src/routes/upload.routes.js` — `POST /api/upload` (authMiddleware + `upload.single('file')`).
+- `backend/src/app.js`: подключён роутер `/api/upload`; добавлена раздача статики `app.use('/uploads', express.static(...))`; добавлен **централизованный error handler** (4 параметра, `err.status || 500`, JSON-ответ вместо голого стека).
+- **Проверка (через файл + filesystem):** upload без токена → 401; неразрешённый MIME → 400 «Тип файла не поддерживается»; image/png → 201 + url; GET `/uploads/<файл>` → 200 + реальный PNG; health → 200.
+- ⚠️ Инцидент: первый тест дал 401 на любой токен — тест запускался без dotenv, `JWT_SECRET` был undefined. В standalone-тестах задаём `process.env.JWT_SECRET` вручную.
+- Создан учебник `docs/history/phase-4-files.md` (multipart/form-data, multer, MIME, error handler, express.static, вопросы). Обновлён `PROGRESS.md` (4.1–4.2 = ✅).
+- ❗ Команды фазы 4 (журнал): `npm install multer`; тест через короткий `node -e "..."` (запись в файл, чтение через filesystem) — длинные команды заменены на файлы-результаты.
+- **Фаза 4 завершена.**
 
 ---
 
