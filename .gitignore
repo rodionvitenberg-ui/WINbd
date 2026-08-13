@@ -4,6 +4,13 @@ node_modules/
 # Секреты (НЕ пушить!)
 .env
 .env.local
+# Credential-файл, сгенерированный MongoDB Atlas onboarding
+backend/atlas-credentials.env
+
+# Служебные папки скиллов (не являются кодом проекта)
+skills/
+skills2/
+skills3/
 
 # Папка загрузок: содержимое не храним, но папку и файл-якорь оставляем
 uploads/*

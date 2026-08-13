@@ -8,6 +8,7 @@
 
 import Link from 'next/link';
 import { useAuth } from '../context/AuthContext';
+import { Bell } from './notifications/Bell';
 
 export function Navigation() {
   const { user, logout } = useAuth();
@@ -21,6 +22,7 @@ export function Navigation() {
       <nav className="nav__links">
         {user ? (
           <>
+            <Bell />
             <Link href="/editor" className="btn btn--secondary">
               Новая статья
             </Link>

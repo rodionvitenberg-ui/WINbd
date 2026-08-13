@@ -135,22 +135,45 @@
 
 ## [7.x] — Блочный редактор (Фаза 7)
 
-### Планируется
-- Editor + Toolbar, блоки text/image/quote/code/file, предпросмотр.
-- Учебник `docs/history/phase-7-editor.md`.
+### 2026-08-11
+- Компоненты-редакторы блоков (только функциональные + хуки): `TextBlock` (style: paragraph/h1/h2/bold/italic), `ImageBlock`, `QuoteBlock`, `CodeBlock` (языки), `FileBlock`.
+- `BlockEditor.tsx` — «роутер» по типу блока; `BlockPreview.tsx` — предпросмотр одного блока; `Toolbar.tsx` — кнопки добавления; `UploadButton.tsx` — загрузка файла через `/api/upload` (FormData → url).
+- `Editor.tsx` — ядро: `useState<Block[]>`, add/update/remove/move, переключатель «Редактор / Предпросмотр», сохранение черновика, публикация сейчас (`publishNow: true`) и отложенная (`publishAt`).
+- `editor/page.tsx` — интеграция `<Editor />` (защита авторизации сохранена).
+- SCSS: тулбар, блоки, предпросмотр, загрузка, публикация.
+- **Проверка:** `cd frontend && npm run build` — успешно (TypeScript ок, все маршруты).
+- Создан учебник `docs/history/phase-7-editor.md` («редактор = массив блоков», управляемые компоненты, публикация = данные). Обновлён `PROGRESS.md` (7.1–7.4 = ✅).
+- ⚠️ По просьбе владельца: коммиты пока не делаем (фазу 6 фикс и фазу 7 — в рабочем дереве).
+- **Фаза 7 завершена.**
 
 ---
 
 ## [8.x] — Уведомления на клиенте (Фаза 8) ⭐
 
-### Планируется
-- socket.io-client, колокольчик Bell.jsx.
-- Учебник `docs/history/phase-8-bell.md`.
+### 2026-08-11
+- `frontend/src/components/notifications/NotificationsProvider.tsx` — контекст: один socket.io-client (websocket, авто-reconnect), слушатели `news:created/updated/deleted`, стек `notifications[]` (max 30), `unreadCount`, `clear`. Защита от SSR: `typeof window !== 'undefined'`.
+- `frontend/src/components/notifications/Bell.tsx` — колокольчик: бейдж счётчика, выпадающая панель, список уведомлений, кнопка «Очистить», закрытие по клику вне.
+- Интеграция: `layout.tsx` оборачивает приложение в `<NotificationsProvider>`, `Navigation.tsx` выводит `<Bell />` (только авторизованным).
+- SCSS: `.bell-*` + анимация `bell-shake` (из DESIGN.md).
+- **Проверка:** `cd frontend && npm run build` — успешно.
+- Создан учебник `docs/history/phase-8-bell.md` (синглтон-сокет, SSR-guard, поллинг vs WebSocket). Обновлён `PROGRESS.md` (8.1–8.2 = ✅).
+- **Фаза 8 завершена.** Дальше — полировка и публикация (Фаза 9).
 
 ---
 
 ## [9.x] — Полировка и публикация (Фаза 9)
 
-### Планируется
-- Адаптивность, деплой backend (Render/Railway/Fly.io) и frontend (Vercel).
-- Учебник `docs/history/phase-9-polish.md`.
+### 2026-08-11
+- **Полировка UI** (скиллы impeccable-design-polish + better-ui):
+  - `scale(0.96)` при нажатии на кнопках (+ `:focus-visible` ring);
+  - фокус-свечение полей ввода (`box-shadow 0 0 0 3px`);
+  - «image outlines» для картинок в тёмной теме (`1px oklch(1 0 0 / 0.1)`, outline-offset -1px);
+  - `@media (prefers-reduced-motion: reduce)` — отключение анимации колокольчика, hover-подъёма карточек и scale-on-press;
+  - переходы сужены до конкретных свойств (без `transition: all`).
+- **Проверка:** `cd frontend && npm run build` — успешно.
+- Обновлён `PROGRESS.md` (9.1 = ✅).
+
+### Планируется (остаток)
+- Деплой backend (Render/Railway/Fly.io), frontend (Vercel).
+- Финальный README, push, самоанализ. Учебник `docs/history/phase-9-polish.md`.
+- Напомнить: коммиты приостановлены владельцем — в дереве не только полировка, но и фиксы фазы 6–8.
