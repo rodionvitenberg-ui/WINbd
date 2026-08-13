@@ -7,14 +7,14 @@ node_modules/
 # Credential-файл, сгенерированный MongoDB Atlas onboarding
 backend/atlas-credentials.env
 
-# Служебные папки скиллов (не являются кодом проекта)
+# Папка загрузок приложения: содержимое не храним, папку и файл-якорь оставляем
+backend/uploads/*
+!backend/uploads/.gitkeep
+
+# Внешние библиотеки скиллов (вне репозитория, в проекте не нужны)
 skills/
 skills2/
 skills3/
-
-# Папка загрузок: содержимое не храним, но папку и файл-якорь оставляем
-uploads/*
-!uploads/.gitkeep
 
 # Логи
 *.log

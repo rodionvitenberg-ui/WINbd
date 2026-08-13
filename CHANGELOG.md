@@ -187,6 +187,13 @@
 - **Проверка:** `cd frontend && npm run build` — успешно (TypeScript ок, все маршруты).
 - Обновлены `PROGRESS.md` (9.2–9.5 = ✅) и этот `CHANGELOG.md`.
 
+### 2026-08-13 (вечер) — полное тестирование по скиллу diagnosing-bugs
+- **E2E-скрипт backend** (`backend/test-e2e.tmp.js`, временный — удалён после прогонов): 39 проверок — health, CORS, auth (register/login/me), news CRUD, отложенная публикация, права автора, валидации, пагинация, upload (MIME-фильтр, статика), socket (created/updated/deleted). Прогнан 3 раза — 39/39 зелёный.
+- **Найден и исправлен Баг A:** публичный `GET /api/news` и `GET /api/news/:id` требовали токен (401 у гостей) — главная страница для неавторизованных была сломана. Причина: `router.use(authMiddleware)` вешал строгую защиту на все маршруты. Решение: создан `backend/src/middleware/optionalAuth.middleware.js` («мягкая» проверка токена — `req.user` если прислан, иначе гость); `news.routes.js`: POST/PUT/DELETE — `authMiddleware`, GET — `optionalAuthMiddleware`; контроллер возвращает 401 только для `?all=1` без токена.
+- **Найден и исправлен Баг B:** невалидный `ObjectId` (`/api/news/not-an-object-id`) давал 500. Причина: CastError не обрабатывался. Решение: валидация формата id `^[0-9a-fA-F]{24}$` → 404 в `getNewsById`, `updateNews`, `deleteNews`; `isOwner` стал безопасным для гостей (`Boolean(req.user && ...)`).
+- **ESLint:** исправлены 4 ошибки `react-hooks/set-state-in-effect` (AuthContext, editor/page, page) + `<a>` → `<Link>` в editor/page. Итог: `npm run lint` → 0 errors (2 `no-img-element` warning оставлены осознанно — изображения приходят из /uploads). `npm run build` — зелёный.
+- Временный e2e-скрипт удалён. Обновлены `PROGRESS.md` (9.6–9.7 = ✅) и этот `CHANGELOG.md`.
+
 ### Планируется (остаток)
 - Деплой backend (Render/Railway/Fly.io), frontend (Vercel). Решение владельца — собственный сервер (см. HANDOVER, раздел 6).
 - Финальный README, синхронизация `news-editor`, push в оба репозитория, самоанализ.
