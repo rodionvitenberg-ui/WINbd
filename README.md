@@ -43,17 +43,18 @@ npm install
 npm run dev
 ```
 
-Сервер поднимется на `http://localhost:5000` (порт задаётся в `.env`).
+Сервер поднимется на `http://localhost:5000` (порт задаётся в `.env`). Фронтенд (Next.js) в dev слушает `http://localhost:3000` — в `CORS_ORIGIN` указывай именно его.
 
 ### 3. Frontend
 
 ```bash
 cd frontend
 npm install
+# создай .env.local по образцу .env.example (NEXT_PUBLIC_API_URL=http://localhost:5000)
 npm run dev
 ```
 
-Приложение откроется на `http://localhost:5173` (стандартный порт Vite).
+Приложение откроется на `http://localhost:3000` (стандартный порт Next.js).
 
 ---
 
